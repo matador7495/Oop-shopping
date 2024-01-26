@@ -52,7 +52,7 @@ class Products {
   addToCart(id) {
     const product = this.products.find((item) => item.id === +id);
     this.cart.productsCustomer.push(product);
-    console.log(this.cart);
+    this.cart.showProductsCustomer();
   }
 }
 export default Products;

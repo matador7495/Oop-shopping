@@ -16,6 +16,7 @@ class Cart {
       const quantity = this.productsCustomer.filter((p) => p.id === product.id).length;
       this.createCard(product, quantity);
     });
+    this.calculateTotalPrice();
   }
 
   createCard(data, quantity) {
@@ -105,6 +106,11 @@ class Cart {
     const newProduct = this.productsCustomer.filter((item) => item.id !== +id);
     this.productsCustomer = newProduct;
     this.showProductsCustomer();
+  }
+
+  calculateTotalPrice() {
+    const total = this.productsCustomer.reduce((acc, cur) => (acc += cur.price), 0);
+    this.totalPrice.innerText = `$ ${total}`;
   }
 }
 

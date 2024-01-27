@@ -1,44 +1,11 @@
-class Cart {
-  constructor(cart, price) {
-    this.cartList = cart;
+import Display from "./Display.js";
+
+class Cart extends Display {
+  constructor(parent, price) {
+    super(parent);
     this.totalPrice = price;
     this.productsCustomer = [];
     this.toShow = [];
-    this.cartList.addEventListener("click", this);
-  }
-
-  showProductsCustomer() {
-    this.toShow = [...new Set(this.productsCustomer)];
-
-    this.cartList.innerHTML = "";
-
-    this.toShow.forEach((product) => {
-      const quantity = this.productsCustomer.filter((p) => p.id === product.id).length;
-      this.createCard(product, quantity);
-    });
-    this.calculateTotalPrice();
-  }
-
-  createCard(data, quantity) {
-    const cardEle = document.createElement("div");
-
-    const imgEle = this.productImg(data);
-    const infoEle = this.productInfo(data);
-    const controlEle = this.productControl(data, quantity);
-
-    cardEle.innerHTML = imgEle;
-    cardEle.innerHTML += infoEle;
-    cardEle.innerHTML += controlEle;
-
-    this.cartList.appendChild(cardEle);
-  }
-
-  productImg(data) {
-    const { image, alt } = data;
-
-    const imgJSX = `<img src=${image} alt=${alt} />`;
-
-    return imgJSX;
   }
 
   productInfo(data) {
@@ -56,6 +23,7 @@ class Cart {
 
   productControl(data, quantity) {
     const { id } = data;
+
     const controlJSX = `
       <div id="cart-control">
         <div>
